@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Caso de estudio: Akinnova." />
-  <title>Akinnova | Facundo Córdova</title>
+  <meta name="description" content="Caso de estudio: Casa Smart Arduino." />
+  <title>Casa Smart Arduino | Facundo Córdova</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -34,45 +34,73 @@
       <div class="detail-hero-content reveal">
         <a class="back-link" href="../index.html#proyectos">← Volver a proyectos</a>
         <p class="eyebrow">Caso de estudio</p>
-        <h1>Akinnova</h1>
-        <p class="hero-description">Sitio web corporativo informativo orientado a presentar los servicios y la propuesta de valor de Akinnova mediante una estructura clara, responsive y profesional.</p>
+        <h1>Casa Smart Arduino</h1>
+        <p class="hero-description">Sistema de vivienda inteligente en maqueta, desarrollado con Arduino UNO. Integra control maestro, sensores de movimiento, conteo de aforo, luces automáticas, alarma y display de 7 segmentos.</p>
         <div class="detail-meta">
-          <span class="project-type">Frontend · Web corporativa</span>
-          <span class="project-state done">Publicado</span>
+          <span class="project-type">IoT · Hardware</span>
+          <span class="project-state done">Prototipo</span>
         </div>
-        <div class="hero-actions"><a class="btn primary" href="https://akinnova.com/" target="_blank" rel="noopener">Ver sitio publicado</a><a class="btn secondary" href="../index.html#proyectos">Volver al portafolio</a></div>
+        <div class="hero-actions"><a class="btn secondary" href="../index.html#proyectos">Volver al portafolio</a></div>
       </div>
       <aside class="detail-logo-card reveal">
-        <div class="logo-orb logo-orb-large"><img src="../assets/img/akinnova-logo.png" alt="Logo de Akinnova" /></div>
-        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive</span><span>Web corporativa</span></div>
+        <div class="logo-orb logo-orb-large"><img src="../assets/img/casa-smart-logo.svg" alt="Logo de Casa Smart Arduino" /></div>
+        <div class="tags"><span>Arduino</span><span>C/C++</span><span>PIR</span><span>IR</span><span>Buzzer</span><span>Display 7 segmentos</span></div>
       </aside>
     </section>
 
     <section class="section container detail-metrics reveal">
-      <div><strong>Frontend</strong><span>Tipo</span></div><div><strong>Publicado</strong><span>Estado</span></div><div><strong>Automotriz</strong><span>Sector</span></div><div><strong>Corporativo</strong><span>Enfoque</span></div>
+      <div><strong>IoT</strong><span>Tipo</span></div><div><strong>Prototipo</strong><span>Estado</span></div><div><strong>Arduino UNO</strong><span>Placa</span></div><div><strong>4 zonas</strong><span>Automatización</span></div>
     </section>
 
     <section class="section container detail-content-grid">
       <article class="detail-panel reveal">
         <p class="eyebrow">Problema</p>
         <h2>Contexto del proyecto</h2>
-        <p>Una marca necesita presencia digital clara para comunicar quién es, qué ofrece, cuál es su propósito y cómo generar confianza con potenciales clientes o aliados.</p>
+        <p>El reto consistía en construir una maqueta funcional de casa inteligente usando recursos limitados de Arduino UNO, integrando control general, detección por ambientes, control de aforo, alarma y visualización del número de personas.</p>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Solución</p>
         <h2>Qué construí</h2>
-        <p>Implementé una página institucional para comunicar servicios, propuesta de valor, propósito de marca y contenido corporativo, aplicando buenas prácticas de diseño web y organización de información.</p>
+        <p>Diseñé una lógica de control basada en entradas digitales: interruptor maestro, sensores IR para ingreso/salida, sensores PIR para ambientes, buzzer de alarma, LEDs por habitación y display de 7 segmentos para mostrar el aforo.</p>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Mi participación</p>
         <h2>Rol y aporte</h2>
-        <p>Trabajé la estructura del sitio, implementación visual, organización de contenido y adaptación responsive.</p>
+        <p>Armé la distribución de pines, conexiones, pruebas de sensores, lógica en Arduino y documentación del funcionamiento. La solución prioriza claridad del circuito, modularidad del código y demostración física en maqueta.</p>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Funciones</p>
         <h2>Características principales</h2>
-        <ul class="project-list"><li>Página principal institucional.</li><li>Secciones de propósito, visión, misión y servicios.</li><li>Presentación de equipo y propuesta de valor.</li><li>Diseño adaptable a escritorio y móvil.</li></ul>
+        <ul class="project-list"><li>Interruptor maestro para habilitar o apagar el sistema.</li><li>4 sensores PIR para detección por ambiente.</li><li>2 sensores IR para conteo de ingreso y salida.</li><li>LEDs de iluminación automática por habitación.</li><li>Buzzer como sistema de alarma.</li><li>Display de 7 segmentos para mostrar el aforo.</li><li>Control lógico de entradas P, I, S y M1-M4 con salidas para display, alarma y luces L1-L4.</li></ul>
       </article>
+    </section>
+
+    <section class="section container detail-content-grid">
+      <article class="detail-panel reveal">
+        <p class="eyebrow">Arquitectura</p>
+        <h2>Entradas y salidas del sistema</h2>
+        <ul class="project-list compact-list">
+          <li><strong>Entradas:</strong> control maestro, sensor de ingreso, sensor de salida y sensores de movimiento por habitación.</li>
+          <li><strong>Procesamiento:</strong> Arduino UNO como unidad de control central.</li>
+          <li><strong>Salidas:</strong> luces L1-L4, alarma con buzzer y display de 7 segmentos.</li>
+        </ul>
+      </article>
+      <article class="detail-panel reveal">
+        <p class="eyebrow">Lógica</p>
+        <h2>Cómo funciona</h2>
+        <p>El sistema lee sensores, actualiza el aforo, activa o apaga luces según presencia en cada zona y muestra el número de personas en el display. Si el control maestro se desactiva, el sistema queda en estado seguro.</p>
+      </article>
+    </section>
+
+    <section class="section container technical-note reveal">
+      <p class="eyebrow">Evidencia técnica</p>
+      <h2>Resumen del código Arduino</h2>
+      <div class="code-summary-grid">
+        <div><strong>Lectura de entradas</strong><span>Sensores IR/PIR y control maestro.</span></div>
+        <div><strong>Control de aforo</strong><span>Incremento por ingreso y decremento por salida.</span></div>
+        <div><strong>Automatización</strong><span>Luces por habitación según movimiento detectado.</span></div>
+        <div><strong>Visualización</strong><span>Actualización del display de 7 segmentos.</span></div>
+      </div>
     </section>
 
     <section class="section alt-section">
@@ -80,9 +108,9 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Evidencia visual</p>
           <h2>Capturas y recursos</h2>
-          <p>Imágenes representativas del proyecto. En proyectos privados, se muestran recursos generales sin exponer información sensible.</p>
+          <p>Evidencia visual del prototipo físico. La maqueta permite demostrar el flujo completo: sensores, luces, aforo, alarma y salida visual en display.</p>
         </div>
-        <div class="detail-gallery"><figure class="gallery-item reveal"><img src="../assets/img/projects/akinnova/1.png" alt="Akinnova - home principal" loading="lazy" class="lightboxable" /><figcaption>1. Home principal</figcaption></figure><figure class="gallery-item reveal"><img src="../assets/img/projects/akinnova/2.png" alt="Akinnova - visión" loading="lazy" class="lightboxable" /><figcaption>2. Visión y propósito</figcaption></figure><figure class="gallery-item reveal"><img src="../assets/img/projects/akinnova/3.png" alt="Akinnova - servicios y consultorías" loading="lazy" class="lightboxable" /><figcaption>3. Servicios y consultorías</figcaption></figure><figure class="gallery-item reveal"><img src="../assets/img/projects/akinnova/4.png" alt="Akinnova - equipo" loading="lazy" class="lightboxable" /><figcaption>4. Equipo</figcaption></figure><figure class="gallery-item reveal"><img src="../assets/img/projects/akinnova/5.png" alt="Akinnova - cierre visual" loading="lazy" class="lightboxable" /><figcaption>5. Cierre visual</figcaption></figure></div>
+        <div class="detail-gallery"><figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/casa-smart.jpeg" alt="Casa Smart Arduino - maqueta funcional" loading="lazy" class="lightboxable" /><figcaption>1. Maqueta física funcional de Casa Smart</figcaption></figure></div>
       </div>
     </section>
 
@@ -90,12 +118,12 @@
       <article class="detail-panel reveal">
         <p class="eyebrow">Tecnologías</p>
         <h2>Stack utilizado</h2>
-        <div class="tags detail-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive</span><span>Web corporativa</span></div>
+        <div class="tags detail-tags"><span>Arduino</span><span>C/C++</span><span>PIR</span><span>IR</span><span>Buzzer</span><span>Display 7 segmentos</span></div>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Siguiente versión</p>
         <h2>Mejoras futuras</h2>
-        <ul class="project-list"><li>Optimizar SEO técnico.</li><li>Añadir más casos o testimonios.</li><li>Mejorar microinteracciones y rendimiento visual.</li></ul>
+        <ul class="project-list"><li>Optimizar cableado, alimentación y orden interno de la maqueta.</li><li>Agregar una fuente externa estable para sensores y actuadores.</li><li>Crear una versión con ESP32, WiFi y panel web de monitoreo.</li><li>Registrar métricas de aforo y estados por habitación.</li></ul>
       </article>
     </section>
 
