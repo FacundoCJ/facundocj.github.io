@@ -1,0 +1,248 @@
+/*
+============
+CASA SMART
+============
+*/
+
+// ==========================================
+// SENSORES FC-51 (Habitaciones)
+// ==========================================
+const int sensorAI = 8;
+const int sensorAD = 9;
+const int sensorAbI = 10;
+const int sensorAbD = 11;
+
+// ==========================================
+// LEDS DE HABITACIONES
+// ==========================================
+const int ledAI = 4;
+const int ledAD = 5;
+const int ledAbI = 6;
+const int ledAbD = 7;
+
+// ==========================================
+// SENSORES IR (Entrada y Salida)
+// ==========================================
+const int irEntrada = 2;
+const int irSalida = 3;
+
+// ==========================================
+// BUZZER
+// ==========================================
+const int buzzer = 12;
+
+// ==========================================
+// DISPLAY 7 SEGMENTOS (Ánodo Común)
+// ==========================================
+const int segA = A1;
+const int segB = A0;
+const int segC = A2;
+const int segD = A3;
+const int segE = A4;
+const int segF = A5;
+const int segG = 13;
+
+// ==========================================
+// VARIABLES GLOBALES
+// ==========================================
+int personas = 0;
+bool entradaAnterior = false;
+bool salidaAnterior = false;
+
+// Variables para anti-rebote de sensores IR
+unsigned long tiempoEntrada = 0;
+unsigned long tiempoSalida = 0;
+const unsigned long DEBOUNCE_DELAY = 50;  // 50ms para evitar rebotes
+
+// ==========================================
+// TABLA DISPLAY (Ánodo Común - LOW enciende)
+// ==========================================
+const bool numeros[10][7] = {
+  {0, 0, 0, 0, 0, 0, 1}, // 0
+  {1, 0, 0, 1, 1, 1, 1}, // 1
+  {0, 0, 1, 0, 0, 1, 0}, // 2
+  {0, 0, 0, 0, 1, 1, 0}, // 3
+  {1, 0, 0, 1, 1, 0, 0}, // 4
+  {0, 1, 0, 0, 1, 0, 0}, // 5
+  {0, 1, 0, 0, 0, 0, 0}, // 6
+  {0, 0, 0, 1, 1, 1, 1}, // 7
+  {0, 0, 0, 0, 0, 0, 0}, // 8
+  {0, 0, 0, 0, 1, 0, 0}  // 9
+};
+
+// ==========================================
+// FUNCIONES
+// ==========================================
+
+void mostrarNumero(int n)
+{
+  if(n < 0) n = 0;
+  if(n > 9) n = 9;
+
+  digitalWrite(segA, numeros[n][0]);
+  digitalWrite(segB, numeros[n][1]);
+  digitalWrite(segC, numeros[n][2]);
+  digitalWrite(segD, numeros[n][3]);
+  digitalWrite(segE, numeros[n][4]);
+  digitalWrite(segF, numeros[n][5]);
+  digitalWrite(segG, numeros[n][6]);
+}
+
+// ==========================================
+// SONIDO DE ALARMA (SIRENA)
+// ==========================================
+void sonidoAlarma()
+{
+  // Sirena ascendente/descendente (efecto policía)
+  for(int i = 0; i < 3; i++) {
+    // Ascendente
+    for(int freq = 800; freq < 2000; freq += 50) {
+      tone(buzzer, freq, 10);
+      delay(5);
+    }
+    // Descendente
+    for(int freq = 2000; freq > 800; freq -= 50) {
+      tone(buzzer, freq, 10);
+      delay(5);
+    }
+  }
+}
+
+// ==========================================
+// CONFIGURACIÓN
+// ==========================================
+void setup()
+{
+  // Sensores FC-51
+  pinMode(sensorAI, INPUT);
+  pinMode(sensorAD, INPUT);
+  pinMode(sensorAbI, INPUT);
+  pinMode(sensorAbD, INPUT);
+  
+  // LEDs
+  pinMode(ledAI, OUTPUT);
+  pinMode(ledAD, OUTPUT);
+  pinMode(ledAbI, OUTPUT);
+  pinMode(ledAbD, OUTPUT);
+  
+  digitalWrite(ledAI, LOW);
+  digitalWrite(ledAD, LOW);
+  digitalWrite(ledAbI, LOW);
+  digitalWrite(ledAbD, LOW);
+  
+  // Sensores IR
+  pinMode(irEntrada, INPUT);
+  pinMode(irSalida, INPUT);
+  
+  // Buzzer
+  pinMode(buzzer, OUTPUT);
+  digitalWrite(buzzer, LOW);
+  
+  // Display
+  pinMode(segA, OUTPUT);
+  pinMode(segB, OUTPUT);
+  pinMode(segC, OUTPUT);
+  pinMode(segD, OUTPUT);
+  pinMode(segE, OUTPUT);
+  pinMode(segF, OUTPUT);
+  pinMode(segG, OUTPUT);
+  
+  mostrarNumero(0);
+  
+  Serial.begin(9600);
+  Serial.println("=== CASA SMART - BUZZER SOLO ALARMA ===");
+  Serial.println("IR Entrada/Salida: Solo cuentan personas");
+  Serial.println("Buzzer: Solo suena con ALARMA");
+  Serial.println("========================================");
+}
+
+// ==========================================
+// PROGRAMA PRINCIPAL
+// ==========================================
+void loop()
+{
+  // ==========================================
+  // 1. LEER SENSORES FC-51 (Habitaciones)
+  // ==========================================
+  bool movimientoAI = !digitalRead(sensorAI);
+  bool movimientoAD = !digitalRead(sensorAD);
+  bool movimientoAbI = !digitalRead(sensorAbI);
+  bool movimientoAbD = !digitalRead(sensorAbD);
+  
+  // ==========================================
+  // 2. ENCENDER LEDs (RESPUESTA INMEDIATA)
+  // ==========================================
+  digitalWrite(ledAI, movimientoAI);
+  digitalWrite(ledAD, movimientoAD);
+  digitalWrite(ledAbI, movimientoAbI);
+  digitalWrite(ledAbD, movimientoAbD);
+  
+  // ==========================================
+  // 3. LEER SENSORES IR (SOLO CONTEO - SIN SONIDO)
+  // ==========================================
+  bool entrada = digitalRead(irEntrada);
+  bool salida = digitalRead(irSalida);
+  
+  // Detectar flanco ascendente en entrada (con anti-rebote)
+  if(entrada && !entradaAnterior && (millis() - tiempoEntrada > DEBOUNCE_DELAY))
+  {
+    tiempoEntrada = millis();
+    personas++;
+    if(personas > 9) personas = 9;
+    
+    mostrarNumero(personas);
+    
+    Serial.print("ENTRÓ. Total: ");
+    Serial.println(personas);
+  }
+  
+  // Detectar flanco ascendente en salida (con anti-rebote)
+  if(salida && !salidaAnterior && (millis() - tiempoSalida > DEBOUNCE_DELAY))
+  {
+    tiempoSalida = millis();
+    personas--;
+    if(personas < 0) personas = 0;
+    
+    mostrarNumero(personas);
+    
+    Serial.print("Salió. Total: ");
+    Serial.println(personas);
+  }
+  
+  entradaAnterior = entrada;
+  salidaAnterior = salida;
+  
+  // ==========================================
+  // 4. ALARMA - SOLO CON 0 PERSONAS
+  // ==========================================
+  bool hayMovimiento = movimientoAI || movimientoAD || movimientoAbI || movimientoAbD;
+  
+  if(personas == 0 && hayMovimiento)
+  {
+    // Sonido de alarma (sirena)
+    sonidoAlarma();
+    
+    Serial.println("ALARMA: Movimiento sin personas!");
+  }
+  
+  // ==========================================
+  // 5. DEBUG (CADA 500ms)
+  // ==========================================
+  static unsigned long tiempoDebug = 0;
+  if(millis() - tiempoDebug > 500)
+  {
+    tiempoDebug = millis();
+    
+    Serial.print("Habs: ");
+    Serial.print(movimientoAI);
+    Serial.print(movimientoAD);
+    Serial.print(movimientoAbI);
+    Serial.print(movimientoAbD);
+    Serial.print(" | IR: E:");
+    Serial.print(entrada);
+    Serial.print(" S:");
+    Serial.print(salida);
+    Serial.print(" | Personas: ");
+    Serial.println(personas);
+  }
+}

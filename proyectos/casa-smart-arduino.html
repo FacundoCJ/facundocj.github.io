@@ -35,16 +35,16 @@
         <a class="back-link" href="../index.html#proyectos">← Volver a proyectos</a>
         <p class="eyebrow">Caso de estudio</p>
         <h1>Casa Smart Arduino</h1>
-        <p class="hero-description">Sistema de vivienda inteligente en maqueta, desarrollado con Arduino UNO. Integra control maestro, sensores de movimiento, conteo de aforo, luces automáticas, alarma y display de 7 segmentos.</p>
+        <p class="hero-description">Sistema de vivienda inteligente en maqueta, desarrollado con Arduino UNO. Integra sensores infrarrojos FC-51, conteo de aforo, luces automáticas, alarma y display de 7 segmentos.</p>
         <div class="detail-meta">
           <span class="project-type">IoT · Hardware</span>
           <span class="project-state done">Prototipo</span>
         </div>
-        <div class="hero-actions"><a class="btn secondary" href="../index.html#proyectos">Volver al portafolio</a></div>
+        <div class="hero-actions"><a class="btn primary" href="../assets/docs/Casa-Smart-Arduino-Codigo.txt" target="_blank" rel="noopener">Ver código Arduino</a><a class="btn secondary" href="../assets/docs/Casa-Smart-Arduino-Documentacion.pdf" target="_blank" rel="noopener">Ver documentación</a><a class="btn secondary" href="../index.html#proyectos">Volver al portafolio</a></div>
       </div>
       <aside class="detail-logo-card reveal">
         <div class="logo-orb logo-orb-large"><img src="../assets/img/casa-smart-logo.svg" alt="Logo de Casa Smart Arduino" /></div>
-        <div class="tags"><span>Arduino</span><span>C/C++</span><span>PIR</span><span>IR</span><span>Buzzer</span><span>Display 7 segmentos</span></div>
+        <div class="tags"><span>Arduino</span><span>C/C++</span><span>FC-51</span><span>IR</span><span>Buzzer</span><span>Display 7 segmentos</span></div>
       </aside>
     </section>
 
@@ -56,12 +56,12 @@
       <article class="detail-panel reveal">
         <p class="eyebrow">Problema</p>
         <h2>Contexto del proyecto</h2>
-        <p>El reto consistía en construir una maqueta funcional de casa inteligente usando recursos limitados de Arduino UNO, integrando control general, detección por ambientes, control de aforo, alarma y visualización del número de personas.</p>
+        <p>El reto consistía en construir una maqueta funcional de casa inteligente usando recursos limitados de Arduino UNO, integrando detección por ambientes, control de aforo, alarma y visualización del número de personas.</p>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Solución</p>
         <h2>Qué construí</h2>
-        <p>Diseñé una lógica de control basada en entradas digitales: interruptor maestro, sensores IR para ingreso/salida, sensores PIR para ambientes, buzzer de alarma, LEDs por habitación y display de 7 segmentos para mostrar el aforo.</p>
+        <p>Diseñé una lógica de control basada en entradas digitales: sensores FC-51 para las habitaciones, sensores IR de ingreso/salida, buzzer de alarma, LEDs por habitación y display de 7 segmentos para mostrar el aforo.</p>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Mi participación</p>
@@ -71,7 +71,7 @@
       <article class="detail-panel reveal">
         <p class="eyebrow">Funciones</p>
         <h2>Características principales</h2>
-        <ul class="project-list"><li>Interruptor maestro para habilitar o apagar el sistema.</li><li>4 sensores PIR para detección por ambiente.</li><li>2 sensores IR para conteo de ingreso y salida.</li><li>LEDs de iluminación automática por habitación.</li><li>Buzzer como sistema de alarma.</li><li>Display de 7 segmentos para mostrar el aforo.</li><li>Control lógico de entradas P, I, S y M1-M4 con salidas para display, alarma y luces L1-L4.</li></ul>
+        <ul class="project-list"><li>4 sensores infrarrojos FC-51 para detección por ambiente.</li><li>2 sensores IR para conteo de ingreso y salida.</li><li>LEDs de iluminación automática por habitación.</li><li>Buzzer como sistema de alarma.</li><li>Display de 7 segmentos para mostrar el aforo.</li><li>Control lógico de entradas I, S y M1-M4 con salidas para display, alarma y luces L1-L4.</li></ul>
       </article>
     </section>
 
@@ -80,7 +80,7 @@
         <p class="eyebrow">Arquitectura</p>
         <h2>Entradas y salidas del sistema</h2>
         <ul class="project-list compact-list">
-          <li><strong>Entradas:</strong> control maestro, sensor de ingreso, sensor de salida y sensores de movimiento por habitación.</li>
+          <li><strong>Entradas:</strong> sensor de ingreso, sensor de salida y sensores FC-51 por habitación.</li>
           <li><strong>Procesamiento:</strong> Arduino UNO como unidad de control central.</li>
           <li><strong>Salidas:</strong> luces L1-L4, alarma con buzzer y display de 7 segmentos.</li>
         </ul>
@@ -88,7 +88,7 @@
       <article class="detail-panel reveal">
         <p class="eyebrow">Lógica</p>
         <h2>Cómo funciona</h2>
-        <p>El sistema lee sensores, actualiza el aforo, activa o apaga luces según presencia en cada zona y muestra el número de personas en el display. Si el control maestro se desactiva, el sistema queda en estado seguro.</p>
+        <p>El sistema lee los sensores FC-51 de cada habitación, actualiza el aforo con los sensores IR de entrada/salida, enciende las luces según presencia y muestra el número de personas en el display. Si detecta movimiento con aforo en cero, activa la alarma con buzzer.</p>
       </article>
     </section>
 
@@ -96,11 +96,33 @@
       <p class="eyebrow">Evidencia técnica</p>
       <h2>Resumen del código Arduino</h2>
       <div class="code-summary-grid">
-        <div><strong>Lectura de entradas</strong><span>Sensores IR/PIR y control maestro.</span></div>
+        <div><strong>Lectura de entradas</strong><span>Sensores FC-51 por habitación e IR de entrada/salida.</span></div>
         <div><strong>Control de aforo</strong><span>Incremento por ingreso y decremento por salida.</span></div>
-        <div><strong>Automatización</strong><span>Luces por habitación según movimiento detectado.</span></div>
+        <div><strong>Automatización</strong><span>Luces por habitación según detección infrarroja.</span></div>
         <div><strong>Visualización</strong><span>Actualización del display de 7 segmentos.</span></div>
       </div>
+    </section>
+
+    <section class="section container code-showcase reveal">
+      <div>
+        <p class="eyebrow">Implementación real</p>
+        <h2>Fragmento del código Arduino</h2>
+        <p>La versión final usa sensores FC-51 para las habitaciones, sensores IR para entrada/salida, antirrebote y una alarma que solo se activa cuando hay movimiento con aforo en cero.</p>
+      </div>
+      <pre><code>bool movimientoAI = !digitalRead(sensorAI);
+bool movimientoAD = !digitalRead(sensorAD);
+bool movimientoAbI = !digitalRead(sensorAbI);
+bool movimientoAbD = !digitalRead(sensorAbD);
+
+if (entrada && !entradaAnterior && millis() - tiempoEntrada > DEBOUNCE_DELAY) {
+  personas++;
+  if (personas > 9) personas = 9;
+  mostrarNumero(personas);
+}
+
+if (personas == 0 && hayMovimiento) {
+  sonidoAlarma();
+}</code></pre>
     </section>
 
     <section class="section alt-section">
@@ -108,9 +130,16 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Evidencia visual</p>
           <h2>Capturas y recursos</h2>
-          <p>Evidencia visual del prototipo físico. La maqueta permite demostrar el flujo completo: sensores, luces, aforo, alarma y salida visual en display.</p>
+          <p>Evidencia visual del prototipo físico y de la documentación técnica. La maqueta demuestra el flujo completo: sensores FC-51, luces, aforo, alarma y salida visual en display.</p>
         </div>
-        <div class="detail-gallery"><figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/casa-smart.jpeg" alt="Casa Smart Arduino - maqueta funcional" loading="lazy" class="lightboxable" /><figcaption>1. Maqueta física funcional de Casa Smart</figcaption></figure></div>
+        <div class="detail-gallery">
+          <figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/casa-smart.jpeg" alt="Casa Smart Arduino - maqueta funcional" loading="lazy" class="lightboxable" /><figcaption>1. Maqueta física funcional de Casa Smart</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/diagrama-bloques.jpg" alt="Diagrama de bloques de Casa Smart" loading="lazy" class="lightboxable" /><figcaption>2. Diagrama de bloques del sistema</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/flujo-datos.jpg" alt="Flujo de datos de Casa Smart" loading="lazy" class="lightboxable" /><figcaption>3. Flujo de datos y procesamiento</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/control-aforo.jpg" alt="Control de aforo de Casa Smart" loading="lazy" class="lightboxable" /><figcaption>4. Control de aforo y tabla de estados</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/display-7-segmentos.jpg" alt="Display de 7 segmentos de Casa Smart" loading="lazy" class="lightboxable" /><figcaption>5. Display de 7 segmentos</figcaption></figure>
+          <figure class="gallery-item reveal"><img src="../assets/img/projects/casa-smart-arduino/automatizacion-habitaciones.jpg" alt="Automatización de habitaciones con sensores FC-51" loading="lazy" class="lightboxable" /><figcaption>6. Automatización de habitaciones</figcaption></figure>
+        </div>
       </div>
     </section>
 
@@ -118,7 +147,7 @@
       <article class="detail-panel reveal">
         <p class="eyebrow">Tecnologías</p>
         <h2>Stack utilizado</h2>
-        <div class="tags detail-tags"><span>Arduino</span><span>C/C++</span><span>PIR</span><span>IR</span><span>Buzzer</span><span>Display 7 segmentos</span></div>
+        <div class="tags detail-tags"><span>Arduino</span><span>C/C++</span><span>FC-51</span><span>IR</span><span>Antirrebote</span><span>Buzzer</span><span>Display 7 segmentos</span></div>
       </article>
       <article class="detail-panel reveal">
         <p class="eyebrow">Siguiente versión</p>

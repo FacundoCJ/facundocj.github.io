@@ -486,3 +486,121 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 760px) {
   .code-summary-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ==== v8: visual polish + corrected IR Casa Smart ==== */
+.proof-band {
+  padding-top: 6px;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+.proof-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(54, 228, 255, .13), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.032));
+  box-shadow: var(--shadow);
+}
+.proof-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -18% -38% auto;
+  width: 140px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: rgba(168,85,247,.16);
+  filter: blur(2px);
+}
+.proof-main {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(54, 228, 255, .2), transparent 40%),
+    radial-gradient(circle at 86% 84%, rgba(168, 85, 247, .2), transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
+}
+.proof-number {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  color: var(--cyan);
+  background: rgba(54, 228, 255, .10);
+  border: 1px solid rgba(54, 228, 255, .18);
+  font-weight: 900;
+}
+.proof-card h3 { margin-bottom: 8px; }
+.proof-card p { margin: 0; color: var(--muted); line-height: 1.65; }
+.logo-orb.hutch-logo-orb {
+  width: min(92%, 250px);
+  padding: 6px;
+  border-radius: 42px;
+  background: rgba(255,255,255,.96);
+}
+.logo-orb.hutch-logo-orb img {
+  width: 116%;
+  height: 116%;
+  max-width: none;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.16));
+}
+.logo-orb-large.hutch-logo-orb {
+  width: min(98%, 390px);
+  padding: 8px;
+  border-radius: 56px;
+}
+.hutch-detail-logo { min-height: 500px; }
+.hutch-gallery-logo img {
+  object-fit: contain !important;
+  background: #fff;
+  padding: 8px !important;
+}
+.code-showcase {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 24px;
+  align-items: stretch;
+  padding-top: 22px;
+}
+.code-showcase > div,
+.code-showcase pre {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  padding: clamp(24px, 4vw, 36px);
+}
+.code-showcase p { color: var(--muted); line-height: 1.75; }
+.code-showcase pre {
+  overflow: auto;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(54, 228, 255, .12), transparent 34%),
+    #050814;
+}
+.code-showcase code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color: #dff7ff;
+  font-size: .92rem;
+  line-height: 1.65;
+}
+.detail-gallery figure img[src*="casa-smart-arduino/"]:not([src$="casa-smart.jpeg"]) {
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 1080px) {
+  .proof-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 980px) {
+  .code-showcase { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .proof-band { grid-template-columns: 1fr; }
+  .logo-orb.hutch-logo-orb { max-width: 245px; }
+}

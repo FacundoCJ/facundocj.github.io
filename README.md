@@ -45,4 +45,9 @@ Versión actualizada del portafolio profesional de Facundo.
 - Caso Casa Smart Arduino reforzado con arquitectura de entradas/salidas, lógica de operación y evidencia técnica.
 - Ajustes visuales para que el portafolio se entienda mejor por reclutadores y público general.
 
-Portafolio profesional de Facundo Córdova.
+
+## v8
+- Logo de H.U.T.C.H. ampliado.
+- Casa Smart corregido: sensores IR/FC-51 en lugar de PIR.
+- Se agregaron recursos visuales de la presentación y enlaces a código/documentación.
+- Se añadió una banda visual de evidencia para reclutadores.
