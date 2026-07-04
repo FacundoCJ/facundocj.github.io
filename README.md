@@ -44,3 +44,5 @@ Versión actualizada del portafolio profesional de Facundo.
 - Sección breve para reclutadores en la página principal.
 - Caso Casa Smart Arduino reforzado con arquitectura de entradas/salidas, lógica de operación y evidencia técnica.
 - Ajustes visuales para que el portafolio se entienda mejor por reclutadores y público general.
+
+Portafolio profesional de Facundo Córdova.
